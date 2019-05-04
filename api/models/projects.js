@@ -1,18 +1,14 @@
 var mongoose = require( 'mongoose' );
 
 var projectSchema = new mongoose.Schema({
-    id: {
-      type: String,
-      unique: true,
-      required: true
-    },
     customer: {
       type: String,
       required: true
     },
     project:  {
         type: String,
-        required : true
+        required : true,
+        unique : true
     },
     accounttam: {
         type : Number,
@@ -23,7 +19,7 @@ var projectSchema = new mongoose.Schema({
         required: Number
     },
     team: {
-        type: Array,
+        type: [{role:String, name: String, uid: mongoose.Schema.Types.ObjectId}],
         required: true
     },
     ctd: {
@@ -33,8 +29,8 @@ var projectSchema = new mongoose.Schema({
     notes: {
         type: String,
         required: false
-    }
-  });
+    },
+  }, { timestamps: { createdAt: 'created', updatedAt: 'updated' } });
 
   projectSchema.methods.method = function(){
   }
